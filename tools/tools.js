@@ -37,6 +37,19 @@ class Tools {
 
     return formatStr.replace('M', M).replace('Y', Y).replace('D', D).replace('h', h).replace('m', m).replace('s', s)
   }
+
+  static removeDuplicatesByTitle(data, prefixLength = 5) {
+    const uniquePrefixes = new Set();
+    const uniqueData = data.filter(item => {
+      const titlePrefix = item.title.substring(0, prefixLength);
+      if (!uniquePrefixes.has(titlePrefix)) {
+        uniquePrefixes.add(titlePrefix);
+        return true;
+      }
+      return false;
+    });
+    return uniqueData;
+  }
 }
 
 module.exports = Tools;
